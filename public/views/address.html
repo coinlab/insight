@@ -48,6 +48,9 @@
             <td><strong>No. Transactions</strong></td>
             <td class="ellipsis text-right">{{address.txApperances}}</td>
           </tr>
+          <tr>
+            <td><strong>Label</strong></td>
+            <td class="ellipsis text-right"><a href="http://148.251.153.43:8000/?groups={{address.clLabel}}&start=150000">{{address.clLabel}}</a></td>
           </tbody>
         </table>
       </div>
@@ -77,4 +80,3 @@
     <div data-ng-include src="'/views/transaction/list.html'" when-scrolled="loadMore()"></div>
   </div>
 </section>
-

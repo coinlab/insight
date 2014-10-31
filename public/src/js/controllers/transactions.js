@@ -39,6 +39,7 @@ function($scope, $rootScope, $routeParams, $location, Global, Transaction, Trans
       // multiple addr at output
       if (items[i].scriptPubKey && items[i].scriptPubKey.addresses.length > 1) {
         items[i].addr = items[i].scriptPubKey.addresses.join(',');
+        items[i].addrLabel = "herp!!!!!!!!!";
         ret.push(items[i]);
         continue;
       }
@@ -53,6 +54,8 @@ function($scope, $rootScope, $routeParams, $location, Global, Transaction, Trans
         tmp[addr].items = [];
       }
       tmp[addr].isSpent = items[i].spentTxId;
+
+	console.log("transactions.js making the object to pass to the template?  tmp[addr]:", tmp[addr], "items[i]:", items[i]);
 
       tmp[addr].doubleSpentTxID = tmp[addr].doubleSpentTxID   || items[i].doubleSpentTxID;
       tmp[addr].doubleSpentIndex = tmp[addr].doubleSpentIndex || items[i].doubleSpentIndex;

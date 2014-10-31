@@ -31,16 +31,16 @@
     <div class="row" data-ng-if="!tx.isCoinBase">
 
       <!-- <<< Simple view -->
-      <div data-ng-if="!itemsExpanded" data-ng-init="currentInNoExpanded=0; sizeInNoExpanded=5">
+      <div data-ng-if="!itemsExpanded" data-ng-init="currentInNoExpanded=0; sizeInNoExpanded=7">
         <div class="panel panel-default" data-ng-repeat="vin in tx.vinSimple| startFrom:currentInNoExpanded*sizeInNoExpanded | limitTo:sizeInNoExpanded">
           <div class="panel-body transaction-vin-vout">
             <div class="pull-right btc-value" data-ng-class="{'text-danger': $root.currentAddr == vin.addr}">
               {{$root.currency.getConvertion(vin.value) || vin.value + ' BTC'}}
             </div>
             <div class="ellipsis">
-              <span data-ng-show="vin.notAddr">{{vin.addr}}</span>
-              <span class="text-muted" title="Current Bitcoin Address" data-ng-show="vin.addr == $root.currentAddr">{{vin.addr}}</span>
-              <a href="/address/{{vin.addr}}" data-ng-show="!vin.notAddr && vin.addr != $root.currentAddr">{{vin.addr}}</a>
+              <span data-ng-show="vin.notAddr">111 {{vin.addrLabel}}</span>
+              <span class="text-muted" title="Current Bitcoin Address" data-ng-show="vin.addr == $root.currentAddr">{{vin.items[0].addrLabel}} {{vin.addr}}</span>
+              <a href="/address/{{vin.addr}}" data-ng-show="!vin.notAddr && vin.addr != $root.currentAddr">{{vin.items[0].addrLabel}} {{vin.addr}}</a>
             </div>
             <div data-ng-show="vin.unconfirmedInput" class="text-danger"> <span class="glyphicon glyphicon-warning-sign"></span> (Input unconfirmed)</div>
             <div data-ng-show="vin.dbError" class="text-danger"> <span class="glyphicon glyphicon-warning-sign"></span> Incoherence in levelDB detected: {{vin.dbError}}</div>
@@ -66,7 +66,7 @@
               <div class="ellipsis">
                 <a class="glyphicon glyphicon-chevron-right" href="/tx/{{vin.txid}}/>/{{vin.vout}}" title="Outpoint: {{vin.txid}},{{vin.vout}}"></a>
                 <span data-ng-show="vin.notAddr">{{vin.addr}}</span>
-                <a href="/address/{{vin.addr}}" data-ng-show="!vin.notAddr">{{vin.addr}}</a>
+                <a href="/address/{{vin.addr}}" data-ng-show="!vin.notAddr">{{vin.addrLabel}} {{vin.addr}}</a>
               </div>
               <div data-ng-show="vin.unconfirmedInput" class="text-danger"> 
                 <span class="glyphicon glyphicon-warning-sign"></span> (Input unconfirmed)
@@ -123,9 +123,9 @@
               </div>
 
               <div class="ellipsis">
-                <span data-ng-show="vout.notAddr">{{vout.addr}}</span>
-                <span class="text-muted" title="Current Bitcoin Address" data-ng-show="address == $root.currentAddr" data-ng-repeat="address in vout.addr.split(',')">{{vout.addr}}</span>
-                <a href="/address/{{address}}"  data-ng-show="!vout.notAddr && address != $root.currentAddr" data-ng-repeat="address in vout.addr.split(',')">{{address}}</a>
+                <span data-ng-show="vout.notAddr">vo1{{vout.addr}}</span>
+                <span class="text-muted" title="Current Bitcoin Address" data-ng-show="address == $root.currentAddr" data-ng-repeat="address in vout.addr.split(',')">{{vout.items[0].scriptPubKey.addrLabel}}{{vout.addr}}</span>
+                <a href="/address/{{address}}"  data-ng-show="!vout.notAddr && address != $root.currentAddr" data-ng-repeat="address in vout.addr.split(',')">{{vout.items[0].scriptPubKey.addrLabel}}{{address}}</a>
               </div>
             </div>
           </div>
